@@ -1,0 +1,13 @@
+{
+    "name": "xianghuanji/console",
+    "description": "享换机job入口工具",
+    "type": "library",
+    "authors": [
+        {
+            "name": "linsheng.wu",
+            "email": "linsheng.wu@xianghuanji.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {}
+}
