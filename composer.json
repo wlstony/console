@@ -15,5 +15,5 @@
             "Console\\": "src/"
         }
     },
-    "bin": ["bin/console.php"]
+    "bin": ["bin"]
 }
