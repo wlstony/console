@@ -15,5 +15,5 @@
             "Console\\": "src/"
         }
     },
-    "bin": ["src/bin/console"]
+    "bin": ["bin/console"]
 }
