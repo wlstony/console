@@ -1,2 +1,14 @@
 #!/usr/bin/env php
 <?php
+
+$vendor_dir = dirname(__DIR__, 2);
+$autoload = "{$vendor_dir}/autoload.php";
+if (! is_file($autoload)) {
+    die("{$autoload} does not exist!");
+}
+require $autoload;
+
+use Console\ArgsParser\Parser;
+
+$parser = new Parser();
+Console\Kernel\Runner::start($parser);
