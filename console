@@ -9,6 +9,9 @@ if (! is_file($autoload)) {
 require $autoload;
 
 use Console\ArgsParser\Parser;
+use Console\Kernel\Loader;
 
 $parser = new Parser();
-Console\Kernel\Runner::start($parser);
+$loader = new Loader();
+
+Console\Kernel\Runner::start($parser, $loader);
