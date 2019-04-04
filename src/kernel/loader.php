@@ -11,6 +11,9 @@ class Loader
             $fromDir[0] = dirname(__DIR__, 5) . '/app/Command';
         }
         $commandDir =  dirname(__DIR__) . '/commands';
+        if (! is_array($fromDir)) {
+            $fromDir =(array)$fromDir; 
+        }
         array_push($fromDir, $commandDir);
         $this->_fromDir = $fromDir;
     }
@@ -20,6 +23,9 @@ class Loader
         $fromDir = $fromDir ? : $this->_fromDir;
         $classes = [];
         foreach((array)$fromDir as $dir) {
+            if (! is_dir($dir)) {
+                throw new \Exception("无法加载目录 {$dir}");
+            }
             $handler = opendir($dir);
             $namespace = '';
             while (($file = readdir($handler)) !== false) {
