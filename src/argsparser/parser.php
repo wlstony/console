@@ -61,7 +61,7 @@ class Parser
             foreach ($classnames as $classname) {
                 $instance = $this->parseFromClass($classname, $namespace);
                 if (isset($commands[$instance->command]) && $commands[$instance->command]) {
-                    throw new \Exception("{$instance->command}命令冲突" . get_class($instance) . '和'
+                    throw new \Exception("{$instance->command} 命令冲突" . get_class($instance) . ' 和 '
                         . get_class($commands[$instance->command]));
                 }
                 $commands[$instance->command] = $instance;

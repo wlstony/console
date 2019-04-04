@@ -8,7 +8,7 @@ class Loader
 
     function __construct($fromDir=[]) {
         if (! $fromDir) {
-            $fromDir[0] = dirname(__DIR__, 5) . '/Console';
+            $fromDir[0] = dirname(__DIR__, 5) . '/app/Command';
         }
         $commandDir =  dirname(__DIR__) . '/commands';
         array_push($fromDir, $commandDir);
@@ -16,9 +16,10 @@ class Loader
     }
 
 
-    function loadClassesFromDir() {
+    function loadClassesFromDir($fromDir=[]) {
+        $fromDir = $fromDir ? : $this->_fromDir;
         $classes = [];
-        foreach($this->_fromDir as $dir) {
+        foreach((array)$fromDir as $dir) {
             $handler = opendir($dir);
             $namespace = '';
             while (($file = readdir($handler)) !== false) {
@@ -26,16 +27,16 @@ class Loader
                 if (strpos($file, '.') === 0) {
                     continue;
                 }
-                if (is_dir($file)) {
-                    echo "is_dir true {$file} \n";
-                    $recursiveClasses = $this->loadClassesFromDir();
+                $fullPath = "{$dir}/{$file}";
+                if (is_dir($fullPath)) {
+                    // echo "is_dir true {$fullPath} \n";
+                    $recursiveClasses = $this->loadClassesFromDir($fullPath);
                     $classes = array_merge($classes, $recursiveClasses);
                 }
                 if (substr($file, -4) != '.php') {
                     continue;
                 }
                 //从每个目录下选择一个文件分析出命名空间
-                $fullPath = "{$dir}/{$file}";
                 if (! $namespace) {
                     $content = file_get_contents($fullPath);
                     preg_match('/<\?php[\s]*namespace[ ]*([\w\d_\\\\]*)[ ]*;/', $content, $matches);
