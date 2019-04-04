@@ -78,7 +78,8 @@ class ProcessStop extends Command
                 $output = [];
                 exec("ps -ao pid | grep '^{$pid}$'", $output, $ret);
                 if ($ret && $output == []) {
-                    echo "{$pid} has stop\n";
+                    echo "{$pid} has stopped\n";
+                    unlink("/tmp/stop_{$pid}");
                     $killedPid[$pid] = $pid;
                 }
             }

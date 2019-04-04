@@ -22,11 +22,25 @@ abstract class Command
     
     final function endLoop() {
         $this->loopCounter--;
+        $pid = $GLOBALS['mypid'];
+        $file = "/tmp/stop_{$pid}";
+        //暂不判断时间戳的内容
+        if (is_file($file)) {
+            $this->loopCounter = 0;
+        }
+
         return $this->loopCounter <= 0;
     }
 
     final function exitSmoothly() {
-
+        $pid = $GLOBALS['mypid'];
+        $file = "/tmp/stop_{$pid}";
+        //暂不判断时间戳的内容
+        if (is_file($file)) {
+            $this->loopCounter = 0;
+        }
+        echo "{$pid} exit smoothly";
+        exit;
     }
 
 
