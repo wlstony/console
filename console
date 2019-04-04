@@ -1,5 +1,7 @@
 #!/usr/bin/env php
 <?php
+//用户控制重启
+$GLOBALS['mypid'] = getmypid();
 
 $vendor_dir = dirname(__DIR__, 2);
 $autoload = "{$vendor_dir}/autoload.php";
@@ -7,7 +9,6 @@ if (! is_file($autoload)) {
     die("{$autoload} does not exist!");
 }
 require $autoload;
-
 use Console\ArgsParser\Parser;
 use Console\Kernel\Loader;
 

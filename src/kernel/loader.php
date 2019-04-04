@@ -22,7 +22,8 @@ class Loader
             $handler = opendir($dir);
             $namespace = '';
             while (($file = readdir($handler)) !== false) {
-                if ($file == '.' || $file == '..') {
+                //.开头的文件不予考虑
+                if (strpos($file, '.') === 0) {
                     continue;
                 }
                 if (is_dir($file)) {

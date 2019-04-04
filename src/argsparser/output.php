@@ -25,7 +25,18 @@ class Output
         foreach ($commad->positionalargs as $item) {
             echo "  {$item['name']} {$item['description']}\n";
         }
+        echo "\nkeyword arguments\n";
+        foreach ($commad->keywordargs as $item) {
+            echo "  {$item['name']} {$item['description']}\n";
+        }
+
         echo "\noptional arguments\n";
+        foreach ($commad->longops as $item) {
+            echo "  --{$item['name']} {$item['description']}\n";
+        }
+        foreach ($commad->shortops as $item) {
+            echo "  -{$item['name']} {$item['description']}\n";
+        }
         echo "\n\n";
     }
 }

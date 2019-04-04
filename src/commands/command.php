@@ -17,7 +17,23 @@ abstract class Command
     public $real_keywordargs = [];
     public $real_positionalargs = [];
 
+    public $loopCounter = 86400;
 
+    
+    final function endLoop() {
+        $this->loopCounter--;
+        return $this->loopCounter <= 0;
+    }
+
+    final function exitSmoothly() {
+
+    }
+
+
+    //验证参数要求与实际参数是否一致
+    final function beforeExec() {
+        //to do
+    }
     abstract function exec();
 
     final function getOptions($long=false) {

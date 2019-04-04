@@ -46,7 +46,8 @@ class Runner
         $instance->real_shortops = $input->getShortops();
         $instance->real_keywordargs = $input->getKeyargs();
         $instance->real_positionalargs = $input->getPosargs();
-        
+        $instance->beforeExec();
+
         call_user_func([$instance, 'exec']);
     }
 }
