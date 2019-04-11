@@ -19,7 +19,7 @@ class ProcessStop extends Command
         }
         $killPid = [];
         $cmd = trim($args[0]);
-        $vendorBinDir = dirname(__file__, 6) . '/vendor/bin';
+        $vendorDir = dirname(__file__, 6) . '/vendor';
         exec("ps -eo pid,command | grep {$cmd}", $output);
         //根据output提取目标信息
         foreach ($output as $item) {
@@ -37,7 +37,7 @@ class ProcessStop extends Command
             if ($arr[3] != $cmd) {
                 continue;
             }
-            $absPath = $arr[2];
+            $absPath = realpath($arr[2]);
             /*现在来比较执行路径
               不以绝对路径开头的,需要计算绝对路径
             */
@@ -47,7 +47,7 @@ class ProcessStop extends Command
                 $workingDir = $cwd[0];
                 $absPath = "{$workingDir}/{$arr[2]}";
             }
-            if (strpos($absPath, $vendorBinDir) === 0) {
+            if (strpos($absPath, $vendorDir) === 0) {
                 $killPid[] = $arr[0];
             }
         }
