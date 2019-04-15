@@ -37,7 +37,7 @@ class ProcessStop extends Command
             if ($arr[3] != $cmd) {
                 continue;
             }
-            $absPath = realpath($arr[2]);
+            $absPath = $arr[2];
             /*现在来比较执行路径
               不以绝对路径开头的,需要计算绝对路径
             */
@@ -47,6 +47,7 @@ class ProcessStop extends Command
                 $workingDir = $cwd[0];
                 $absPath = "{$workingDir}/{$arr[2]}";
             }
+            $absPath = realpath($absPath);
             if (strpos($absPath, $vendorDir) === 0) {
                 $killPid[] = $arr[0];
             }
